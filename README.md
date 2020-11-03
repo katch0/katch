@@ -1,4 +1,4 @@
-# katch-js - event-oriented application glue
+# katch – event-oriented application glue
 
 ```
 import {katch} from 'katch';
