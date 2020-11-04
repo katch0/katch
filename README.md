@@ -1,7 +1,7 @@
 # katch – static event-oriented application glue
 
 ```
-import {katch} from 'katch';
+import {katch, app} from 'katch';
 
 class cat {
   static event() {
@@ -29,9 +29,13 @@ class cat {
 
 class human {
   
-  feed() {
+  pet() {
     katch(cat.event.murred);
-    
+    console.log('Human: *pet cat');
+  }
+  
+  test_in_context() {
+    katch(apartment.cat.)
   }
   
 }
@@ -40,7 +44,7 @@ class human {
 class scene {
   
   static init() {
-    katch(katch.app.request.init);
+    katch(app.request.init);
   
     var Human = new human();
     var Cat   = new cat();
@@ -48,7 +52,6 @@ class scene {
     Cat.event.murred();
   
   }
-  
   
 }
 
