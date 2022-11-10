@@ -1,25 +1,32 @@
 # katch – static event-oriented application glue
 
 ```
-import {katch, app} from 'katch';
+import {Katch} from 'katch';
 
+@Katch
 class cat {
   static event() {
-    cat.event.bited     = katch.event();
-    cat.event.murred    = katch.event();
+    cat.event.bited     = Katch.event();
+    cat.event.murred    = Katch.event();
   }
   static request() {
-    cat.request.food    = katch.request();
+    cat.request.food    = Katch.request();
   }
+
+  @Katch
   make_mur() {
     katch(human.event.touchedCat, {Human: this.Owner});
     console.log('Cat: mur');
     
   }
+  
+  @Katch
   make_bite() {
     let [, {Human}] = katch(human.event.touchedCat, {Human: $ => $ !== this.Owner }, );
     console.log('Cat bite', Human);
   }
+
+  @Katch
   murring(process) {
     this.make_mur();
     
@@ -27,13 +34,16 @@ class cat {
   
 }
 
+@Katch
 class human {
   
+  @Katch
   pet() {
     katch(cat.event.murred);
     console.log('Human: *pet cat');
   }
   
+  @Katch
   test_in_context() {
     katch(apartment.cat.)
   }
@@ -41,19 +51,11 @@ class human {
 }
 
 
-class scene {
-  
-  static init() {
-    katch(app.request.init);
-  
-    var Human = new human();
-    var Cat   = new cat();
-  
-    Cat.event.murred();
-  
-  }
-  
-}
+export {cat, human};
+```
 
-export {cat, human, setting};
+run it using shell command:
+
+```
+node -r ts-node/register/transpile-only --nolazy --inspect katch.ts --init-context=cat,human,scene
 ```
