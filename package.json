@@ -1,10 +1,10 @@
 {
   "name": "@katch-language/ts",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "main": "index.js",
   "bin": {
-    "katch-language-ts": "index.js"
+    "katch-language-ts": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
