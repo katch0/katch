@@ -1,6 +1,6 @@
 {
   "name": "@katch-language/ts",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "npm version patch --force"
+    "prepare": "npm version patch --force"
   },
   "author": "",
   "license": "ISC",
