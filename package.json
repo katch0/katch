@@ -1,13 +1,14 @@
 {
   "name": "@katch-language/ts",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "index.js",
   "bin": {
     "katch-language-ts": "index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm version patch --force"
   },
   "author": "",
   "license": "ISC",
