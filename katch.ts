@@ -88,7 +88,7 @@ export class KatchContext {
    ModuleToInit;
 
    // @todo
-   async initFromCommandLine(init_contexts = undefined) {
+   static async initFromCommandLine(init_contexts = undefined) {
 
       init_contexts = init_contexts ||
          (process.argv.
@@ -109,18 +109,22 @@ export class KatchContext {
       await new Promise(_ => setTimeout(_, process.execArgv.indexOf('--inspect') === -1 ? 0 : 1000));
 
       await this.scanFilesInDirectory();
-      await this.initAllContexts(init_contexts)
-      await this.runTests();
+
+      if(run_tests) {
+         await this.runTests();
+      }
 
       if(init_contexts.length) {
-         await this.initAllObjects();
-         await this.scanMethodsAndSubscribe();
-         await this.triggerInitRequestToRunApp();
+         contexts.App = new KatchContext();
+         await contexts.App.initAllContexts(init_contexts)
+         await contexts.App.initAllObjects();
+         await contexts.App.scanMethodsAndSubscribe();
+         await contexts.App.triggerInitRequestToRunApp();
       }
 
    }
 
-   async scanFilesInDirectory() {
+   static async scanFilesInDirectory() {
 
       Katch.classes[KatchApp.name] = KatchApp;
 
@@ -206,7 +210,7 @@ export class KatchContext {
       }
    }
 
-   async runTests() {
+   static async runTests() {
       // запустить тесты
       katchMode = 2;
       for(let classname in Katch.classes) {
