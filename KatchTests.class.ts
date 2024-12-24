@@ -79,6 +79,13 @@ export class KatchTests extends Katch.Class {
 
    }
 
+   async [Katch.test_class](Test) {
+
+      this.fireEvent(KatchTests.Event_Test1({a:1, b:3}));
+      this.fireEvent(KatchTests.Event_Test1({a:7, b:3}));
+
+   }
+
    // async [Katch.test_integration(Logger)]() {
    //
    //    this.fireEvent(KatchTests.Event_Test1({a:2, b:3}));

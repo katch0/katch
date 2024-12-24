@@ -76,8 +76,6 @@ let class2decorated_static_methods = {};
 @LogClass
 export class KatchContext {
 
-   App = null
-
    classes                 = []
    objects                 = []
    listeners_event         = []
@@ -216,7 +214,12 @@ export class KatchContext {
       for(let classname in Katch.classes) {
          for(let test of class2collected_tests[classname]) {
 
-            let instance = new (Katch.classes[classname]);
+            let ctx = new KatchContext();
+            ctx.classes.push(Katch.classes[classname]);
+            await ctx.initAllObjects();
+            await ctx.scanMethodsAndSubscribe();
+
+            let instance = ctx.objects[0];
             Katch.debug = await instance[test]();
 
          }
@@ -573,7 +576,7 @@ let contexts = {
    //    listeners_request: [],
    //    listeners_requestevent: [],
    // }
-   App: new KatchContext()
+   // App: new KatchContext()
 };
 
 Katch.EventPoint = Katch.RequestPoint = (..._point_args) => {
@@ -608,7 +611,7 @@ export class KatchApp extends Katch.Class {
 }
 
 if (!module.parent)  {
-   (new KatchContext()).initFromCommandLine()
+   KatchContext.initFromCommandLine()
 }
 
 export function _(type, params = {}) {
